@@ -30,19 +30,29 @@ def home():
 @app.route('/prediction', methods=['POST'])
 def prediction():
     category = str(request.form.get('category')).upper()                               
-    print(category)                                        
     category = [[category]]  
     print(category)                             
 
+    #Encode la catégorie du projet suivant le modèle de One Hot Encoding
     new_matrix_entreprise = oneHotEncoding_model.transform(category)
 
+    #Calcul la sim par cosin entre la matrice du projet et celle de l'entreprise
     distance_sim_entreprise = linear_kernel(new_matrix_entreprise, oneHotEncoding_matrix_entreprise)
 
-    cosin_max = distance_sim_entreprise.max()
+    # recup les scores de similarité de tt les autres entreprises par rapport aux param
+    sim_scores = list(enumerate(distance_sim_entreprise[0]))
 
-    index = np.where(distance_sim_entreprise == cosin_max)
+    # trie les entreprises par score
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
-    reponse = indices_entreprise[:10]
+    # top 10 des plus similaires
+    sim_scores = sim_scores[0:11]
+
+    # recup les index des entreprises avec les meilleurs score
+    idx_entreprises = [i[0] for i in sim_scores]
+
+    reponse = list(indices_entreprise[idx_entreprises])
+
     print(reponse)
                                                           
-    return jsonify(list(reponse))   
+    return jsonify(reponse)   
