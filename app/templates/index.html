@@ -59,8 +59,9 @@
                 success: function(response) {
                     var output = $("#output");
                     output.html(null);
-                    output.append("<h2>"+response+"</h2>");
-
+                    for(var i =0; i < response.length; i++){
+                    output.append("<h2>"+response[i]+"</h2>");
+                     }
                     console.log(response);
                 },
                 error: function(response) {

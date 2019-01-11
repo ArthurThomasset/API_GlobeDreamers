@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from app import app
 import numpy as np 
 import pandas as pd
@@ -42,7 +42,7 @@ def prediction():
 
     index = np.where(distance_sim_entreprise == cosin_max)
 
-    reponse = indices_entreprise[index[1][0]]
-
+    reponse = indices_entreprise[:10]
+    print(reponse)
                                                           
-    return ("Entreprises : {0}").format(reponse)      
+    return jsonify(list(reponse))   
