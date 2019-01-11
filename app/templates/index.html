@@ -13,12 +13,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <style>
-      html, body {
-        width: 100%;
-        height: 100%;
-      }
-  </style>
+   <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
 </head>
 
 <body>
@@ -39,47 +35,7 @@
             </div>
         </div>
   </div> <!-- /container -->
-  <script>
-    $(document).ready(function(){
-        $("#predict").click(
-        function predict(event) {
-            var selectors = ["category"];
-            var values = selectors.map((sel)=>document.getElementById(sel).value);
-            console.log(values);
-            var urlPrefix;
-            if(window.location.port) {
-                urlPrefix = window.location.protocol + '//' + window.location.hostname + ":" + window.location.port + window.location.pathname
-            } else {
-                urlPrefix = window.location.protocol + '//' + window.location.hostname + window.location.pathname + "/"
-            }
-            console.log(urlPrefix);
-            $.ajax({
-                url: urlPrefix+"prediction",
-                type: "POST",
-                data: {
-                  category : values[0]
-                },
-                success: function(response) {
-                    var output = $("#output");
-                    output.html(null);
-                    output.append('<table  id="compactTable" class="table">    <thead class="thead-light"> <tr>  <th>Result</th>  </tr>  </thead>  <tbody>')
-                    for(var i =0; i < response.length; i++){
 
-                    output.append('<li class="list-group-item">'+response[i]+'</li>');
-
-
-                     }
-                     output.append('</tbody> </table>')
-                    console.log(response);
-                },
-                error: function(response) {
-                    console.log("===== ERROR =====");
-                    console.log(response);
-                }
-            });
-            event.preventDefault();
-        });
-    });
-  </script>
+  <script type=text/javascript src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
