@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="classification de mail">
+  <meta name="author" content="Arthur Thomasset arthur.thomasset@orange.fr">
+
+  <title>GlobeDreamers Recommandation API</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="background-color: #f2f2f2; width: 100%; height: 100%;">
+        <div class="row" style="height: 100%; align-items: center;">
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <label for="category">Indiquez la catégorie du projet</label>
+                        <input type="String" class="form-control" id="category" name="category" placeholder="Votre texte">
+                    </div>
+                    <button type="submit" id="predict" class="btn btn-primary">Recommandation</button>
+                </form>
+            </div>
+            <div class="col">
+                <div id="output"></div>
+            </div>
+        </div>
+  </div> <!-- /container -->
+  <script>
+    $(document).ready(function(){
+        $("#predict").click(
+        function predict(event) {
+            var selectors = ["category"];
+            var values = selectors.map((sel)=>document.getElementById(sel).value);
+            console.log(values);
+            var urlPrefix;
+            if(window.location.port) {
+                urlPrefix = window.location.protocol + '//' + window.location.hostname + ":" + window.location.port + window.location.pathname
+            } else {
+                urlPrefix = window.location.protocol + '//' + window.location.hostname + window.location.pathname + "/"
+            }
+            console.log(urlPrefix);
+            $.ajax({
+                url: urlPrefix+"prediction",
+                type: "POST",
+                data: {
+                  category : values[0]
+                },
+                success: function(response) {
+                    var output = $("#output");
+                    output.html(null);
+                    output.append("<h2>"+response+"</h2>");
+
+                    console.log(response);
+                },
+                error: function(response) {
+                    console.log("===== ERROR =====");
+                    console.log(response);
+                }
+            });
+            event.preventDefault();
+        });
+    });
+  </script>
+</body>
+</html>
