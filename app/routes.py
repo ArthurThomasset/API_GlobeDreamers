@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template, jsonify
 from app import app
-import numpy as np 
+import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel
-import pickle 
+import pickle
 from flaskext.mysql import MySQL
 
 
@@ -19,7 +19,7 @@ with open('modeles/oneHotEncoding_model.pkl', 'rb') as d:
 with open('modeles/indices_entreprise.pkl', 'rb') as d:
     indices_entreprise = pickle.load(d)
     print("Done")
-    
+
 mysql = MySQL()
 
 # MySQL configurations
@@ -39,12 +39,12 @@ def home():
 # Route prediction qui permet de récupérer les données et de faire la prédiction
 @app.route('/prediction', methods=['POST'])
 def prediction():
-    category = str(request.form.get('category')).upper()                               
-    category = [[category]]  
-    print(category)                             
+    category = str(request.form.get('category')).upper()
+    category = [[category]]
+    print(category)
 
     ###########
-    #Calcul de similarité pour la recommandation 
+    #Calcul de similarité pour la recommandation
     ###########
 
     #Encode la catégorie du projet suivant le modèle de One Hot Encoding
@@ -76,14 +76,14 @@ def prediction():
     liste_json_entreprise = []
 
     for titre_ in l_titre_entreprise:
-    	cursor.execute("SELECT * FROM Entreprise as E WHERE E.title = %s" , [titre_])
+    	cursor.execute("SELECT * FROM Entreprise_ as E WHERE E.title = %s" , [titre_])
     	requete_Information_Entreprise = cursor.fetchall()
     	liste_json_entreprise.append(requete_Information_Entreprise)
 
 
     print(liste_json_entreprise)
-    
+
 
    ##########
-                                                          
-    return jsonify(liste_json_entreprise)   
+
+    return jsonify(liste_json_entreprise)

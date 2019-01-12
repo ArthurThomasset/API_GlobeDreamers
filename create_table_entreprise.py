@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 import numpy as np
 import json
 from sqlalchemy import create_engine
@@ -30,7 +30,7 @@ df_clean['presentation'] = df_clean.loc[:, 'presentation'].replace(regex=True, t
 df_clean['category'] = df_clean['category'].str.upper()
 
 
-create_db = 0
+create_db = 1
 
 if create_db:
     engine = create_engine("mysql://root:root@localhost:3306/Entreprise_GlobeDreamers?charset=utf8")
