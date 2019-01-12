@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel
 import pickle 
+from flaskext.mysql import MySQL
 
 
 with open('modeles/oneHotEncoding_matrix_entreprise.pkl', 'rb') as d:
@@ -19,6 +20,15 @@ with open('modeles/indices_entreprise.pkl', 'rb') as d:
     indices_entreprise = pickle.load(d)
     print("Done")
     
+mysql = MySQL()
+
+# MySQL configurations
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_DB'] = 'Entreprise_GlobeDreamers'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+
+mysql.init_app(app)
 
 # Route home qui permet d'afficher l'index
 @app.route('/')
@@ -32,6 +42,10 @@ def prediction():
     category = str(request.form.get('category')).upper()                               
     category = [[category]]  
     print(category)                             
+
+    ###########
+    #Calcul de similarité pour la recommandation 
+    ###########
 
     #Encode la catégorie du projet suivant le modèle de One Hot Encoding
     new_matrix_entreprise = oneHotEncoding_model.transform(category)
@@ -51,8 +65,25 @@ def prediction():
     # recup les index des entreprises avec les meilleurs score
     idx_entreprises = [i[0] for i in sim_scores]
 
-    reponse = list(indices_entreprise[idx_entreprises])
+    # recup les nom des entreprises
+    l_titre_entreprise = list(indices_entreprise[idx_entreprises])
 
-    print(reponse)
+    ###########
+    #Affichage via BDD MySQL
+    ###########
+    cursor = mysql.connect().cursor()
+
+    liste_json_entreprise = []
+
+    for titre_ in l_titre_entreprise:
+    	cursor.execute("SELECT * FROM Entreprise as E WHERE E.title = %s" , [titre_])
+    	requete_Information_Entreprise = cursor.fetchall()
+    	liste_json_entreprise.append(requete_Information_Entreprise)
+
+
+    print(liste_json_entreprise)
+    
+
+   ##########
                                                           
-    return jsonify(reponse)   
+    return jsonify(liste_json_entreprise)   
