@@ -21,7 +21,7 @@ $(document).ready(function(){
             success: function(response) {
                 var output = $("#output");
                 output.html(null);
-                output.append('<table  id="compactTable" class="table">    <thead class="thead-light"> <tr>  <th>Result</th>  </tr>  </thead>  <tbody>')
+                output.append('<table  id="compactTable" class="table">    <thead class="thead-light"> <tr>  <th>Propects potentiels : </th>  </tr>  </thead>  <tbody>')
                 for(var i =0; i < response.length; i++){
 
                 output.append('<li class="list-group-item">'+response[i]+'</li>');
