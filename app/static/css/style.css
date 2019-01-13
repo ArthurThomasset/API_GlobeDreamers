@@ -8,6 +8,10 @@ nav{
  background-color: #1d428a;
 }
 
+#result{
+  display: none;
+  }
+
 .container{
   padding-top: 40px;
   background-color: #f2f2f2;
@@ -64,5 +68,4 @@ body > div > form{
 .table{
   max-width: 100%;
   margin-bottom: 0px;
-
 }

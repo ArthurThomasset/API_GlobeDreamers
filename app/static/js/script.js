@@ -1,7 +1,71 @@
+const vm = new Vue({
+          el: '#app',
+          data: {
+          results: [],
+          titles: [],
+          tests: ["titre1", "titre2"],
+          category: ''
 
-$(document).ready(function(){
-    $("#predict").click(
-    function predict(event) {
+        },
+        methods: {
+
+          Search(){
+            console.log("GO")
+
+                    var urlPrefix;
+                    if(window.location.port) {
+                        urlPrefix = window.location.protocol + '//' + window.location.hostname + ":" + window.location.port + window.location.pathname
+                    } else {
+                        urlPrefix = window.location.protocol + '//' + window.location.hostname + window.location.pathname + "/"
+                    }
+
+                    console.log(urlPrefix)
+
+                    urlPrefix = "http://127.0.0.1:5000/"
+                    const bodyFormData = new FormData();
+                    bodyFormData.append('category', vm.category);
+
+
+                    axios({
+
+                    url: urlPrefix+ 'prediction',
+                    method: 'post',
+                    headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+
+                    data: bodyFormData
+
+                })
+                    .then(function(response){
+                        vm.results  = response.data;
+
+
+                        console.log(vm.results)
+                        console.log(vm.results[0][0][7])
+                        console.log(vm.results.length)
+
+                        var mytitles = [];
+                        for(var i=0; i< vm.results.length;i++)
+                        {
+                          mytitles.push(vm.results[i][0][7]);
+                        }
+
+                        vm.titles = mytitles;
+
+                      document.getElementById('result').style.display='block';
+
+                        console.log(vm.titles);
+                        console.log("title length : "+ vm.titles.length);
+                      }).catch(function (error) {
+
+                        console.log(error);
+                      })
+
+                    event.preventDefault();
+
+          },
+
+          Search2(){
+
         var selectors = ["category"];
         var values = selectors.map((sel)=>document.getElementById(sel).value);
         console.log(values);
@@ -37,5 +101,13 @@ $(document).ready(function(){
             }
         });
         event.preventDefault();
-    });
-});
+
+
+          },
+
+          LogIn(){
+          }
+
+        },
+        mounted() {}
+      });
