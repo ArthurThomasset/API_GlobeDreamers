@@ -81,6 +81,21 @@ body > div > form{
 .card{
 
   top: 40px;
+  box-sizing: border-box;
+  overflow-x: scroll;
 
 
+}
+
+.th{
+
+  width:200px;
+}
+
+.td{
+
+  width:200px;
+}
+#tel{
+  white-space: nowrap
 }

@@ -35,5 +35,5 @@ create_db = 1
 if create_db:
     engine = create_engine("mysql://root:root@localhost:3306/Entreprise_GlobeDreamers?charset=utf8")
     #if you want to create a new table 
-    df_clean.to_sql(name='Entreprise_',con=engine,if_exists='fail',index=False)
+    df_clean.to_sql(name='Entreprise',con=engine,if_exists='fail',index=False)
     print("**BDD crée**")

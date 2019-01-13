@@ -92,6 +92,9 @@
               <thead class="thead-light">
                 <tr>
                    <th scope="colgroup"> Noms  </th>
+                   <th scope="colgroup"> Categorie  </th>
+                   <th scope="colgroup"> Adresse  </th>
+                   <th scope="colgroup"> Téléphone  </th>
                    <th scope="colgroup"> Site web  </th>
                  </tr>
                </thead>
@@ -100,7 +103,10 @@
 
                 <tr v-for="(result, index) in results" >
                       <td>{{ result[0][7]}} </td>
-                      <td><a  href=result[0][9]>{{ result[0][9]}}</a> </td>
+                      <td>{{ result[0][3]}} </td>
+                      <td>{{ result[0][0]}} </td>
+                      <td id ="tel">{{ result[0][4]}} </td>
+                      <td><a  :href="result[0][9]">{{ result[0][9]}}</a> </td>
 
                 </tr>
 
