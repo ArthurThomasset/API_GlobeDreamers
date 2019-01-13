@@ -4,7 +4,8 @@ const vm = new Vue({
           results: [],
           titles: [],
           tests: ["titre1", "titre2"],
-          category: ''
+          category: '',
+          code_postal: ''
 
         },
         methods: {
@@ -24,6 +25,8 @@ const vm = new Vue({
                     urlPrefix = "http://127.0.0.1:5000/"
                     const bodyFormData = new FormData();
                     bodyFormData.append('category', vm.category);
+
+                    bodyFormData.append('code_postal',vm.code_postal);
 
 
                     axios({

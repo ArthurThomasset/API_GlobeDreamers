@@ -44,7 +44,7 @@ def prediction():
     code_postal = int(request.form.get('code_postal'))
     print(code_postal)
 
-    df_sim_param = pd.DataFrame({'code_postaux':[75], 'category':[category]})
+    df_sim_param = pd.DataFrame({'code_postaux':[code_postal], 'category':[category]})
 
     ###########
     #Calcul de similarité pour la recommandation
