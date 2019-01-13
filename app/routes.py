@@ -40,15 +40,18 @@ def home():
 @app.route('/prediction', methods=['POST'])
 def prediction():
     category = str(request.form.get('category')).upper()
-    category = [[category]]
     print(category)
+    code_postal = int(request.form.get('code_postal'))
+    print(code_postal)
+
+    df_sim_param = pd.DataFrame({'code_postaux':[75], 'category':[category]})
 
     ###########
     #Calcul de similarité pour la recommandation
     ###########
 
     #Encode la catégorie du projet suivant le modèle de One Hot Encoding
-    new_matrix_entreprise = oneHotEncoding_model.transform(category)
+    new_matrix_entreprise = oneHotEncoding_model.transform(df_sim_param)
 
     #Calcul la sim par cosin entre la matrice du projet et celle de l'entreprise
     distance_sim_entreprise = linear_kernel(new_matrix_entreprise, oneHotEncoding_matrix_entreprise)
@@ -76,7 +79,7 @@ def prediction():
     liste_json_entreprise = []
 
     for titre_ in l_titre_entreprise:
-    	cursor.execute("SELECT * FROM Entreprise_ as E WHERE E.title = %s" , [titre_])
+    	cursor.execute("SELECT * FROM Entreprise as E WHERE E.title = %s" , [titre_])
     	requete_Information_Entreprise = cursor.fetchall()
     	liste_json_entreprise.append(requete_Information_Entreprise)
 
