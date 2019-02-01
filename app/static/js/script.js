@@ -10,7 +10,7 @@ const vm = new Vue({
         },
         methods: {
 
-          Search(){
+          Search(){  // fonction de recherche 1 avec Catégorie et code postal
             console.log("GO")
 
                     var urlPrefix;
@@ -22,7 +22,7 @@ const vm = new Vue({
 
                     console.log(urlPrefix)
 
-                    urlPrefix = "http://127.0.0.1:5000/"
+                    urlPrefix = "http://127.0.0.1:5000/"    // URL de l'api (serveur ou elle tournera)
                     const bodyFormData = new FormData();
                     bodyFormData.append('category', vm.category);
 
@@ -108,9 +108,24 @@ const vm = new Vue({
 
           },
 
-          LogIn(){
-          }
+          ExportCSV(){
+            console.log("export csv");
+            var dataURL = '';
+            var dataRow = '';
+
+
+                for(var i=0; i< vm.results.length;i++)
+                {
+                    dataRow = vm.results[i][0][7] + ";" + vm.results[i][0][3] + ";" + vm.results[i][0][0] + ";" + vm.results[i][0][4] + ";" + vm.results[i][0][9] + ";" ;
+                    dataURL += dataRow + '\n';
+                    dataRow = '';
+                }
+
+
+            $('.btn').attr('href', 'data:text/csv;charset=utf-8;base64,' + btoa(dataURL));
+        }
+
 
         },
-        mounted() {}
+        mounted() {} // Don't touch 
       });
