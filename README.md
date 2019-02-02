@@ -1,5 +1,33 @@
 # API Globedreamers
 
+## Présentation 
+
+GlobeDreamers est la premie re plateforme de financement participatif pour les voyageurs, elle vise a de velopper des projets a impact positifs au niveau environnemental et humanitaire. Un enjeu majeur de GlobeDreamers pour les entreprises est notamment d’humaniser leurs marques et engager leurs communaute a travers des valeurs qui leurs sont propres en sponsorisant ces projets.
+Pour ce faire, GlobeDreamers doit se doter d’un outil de recommandation de prospects performant afin d’ame liorer les financements et la visibilite des projets qu’elle propose et ainsi aider les busines de veloppeurs dans le choix de leurs partenaires.
+Les objectifs de de part e taient de fournir une interface web permettant de donner un projet en entre e, pour avoir une liste d’entreprises a contacter afin de financer un projet.
+
+## Description technique 
+
+### Arborescence
+
+/app 
+-/static (partie web)
+--/js
+--/css
+-/template (partie web)
+/data
+-/Entreprises (Données d'entreprises)
+-/Projets (Données de projets)
+/modeles (modèles à importer et et algo V1 et V2)
+/venv (contient les librairies)
+.flaskenv
+.gitignore
+.api_flask.py
+.bdd_entreprise_globedreamers.sql
+.create_table_entreprise.py
+.README.md
+.requirements.txt 
+
 ## Initialisation du projet
 
 ### Installation de l'environnement virtuel
@@ -39,3 +67,5 @@ $python create_table_entreprise.py
 ```
 
 - Vérifier que la table "Entreprise" a bien été crée dans la bdd "Entreprise_GlobeDreamers" en éxécutant les autres lignes de "bdd_entreprise_globedreamers.sql"
+
+- Pour finir installer le module "Allow-Control-Allow-Origin: *" et l'activer pour utiliser l'API
