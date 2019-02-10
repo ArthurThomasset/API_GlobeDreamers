@@ -2,33 +2,34 @@
 
 ## Présentation 
 
-GlobeDreamers est la premiere plateforme de financement participatif pour les voyageurs, elle vise a de velopper des projets a impact positifs au niveau environnemental et humanitaire.
+GlobeDreamers est la première plateforme de financement participatif pour les voyageurs, elle vise à développer des projets à impact positifs au niveau environnemental et humanitaire.
 
-Un enjeu majeur de GlobeDreamers pour les entreprises est notamment d’humaniser leurs marques et engager leurs communaute a travers des valeurs qui leurs sont propres en sponsorisant ces projets.
+Un enjeu majeur de GlobeDreamers pour les entreprises est notamment d’humaniser leurs marques et engager leurs communautés à travers des valeurs qui leurs sont propres en sponsorisant ces projets.
 
-Pour ce faire, GlobeDreamers doit se doter d’un outil de recommandation de prospects performant afin d’ame liorer les financements et la visibilite des projets qu’elle propose et ainsi aider les busines de veloppeurs dans le choix de leurs partenaires.
+Pour ce faire, GlobeDreamers doit se doter d’un outil de recommandation de prospects performant afin d’améliorer les financements et la visibilité des projets qu’elle propose et ainsi aider les business développeurs dans le choix de leurs partenaires.
 
-Les objectifs de de part e taient de fournir une interface web permettant de donner un projet en entre e, pour avoir une liste d’entreprises a contacter afin de financer un projet.
+Les objectifs de départ étaient de fournir une interface web permettant de donner un projet en entrée, pour avoir une liste d’entreprises à contacter afin de financer un projet.
 
 ## Description technique 
 
 ### Arborescence
 
+```bash
 /app 
 
--/static (partie web)
+ -/static (partie web)
 
---/js
+  --/js
 
---/css
+  --/css
 
--/template (partie web)
+ -/template (partie web)
 
 /data
 
--/Entreprises (Données d'entreprises)
+ -/Entreprises (Données d'entreprises)
 
--/Projets (Données de projets)
+ -/Projets (Données de projets)
 
 /modeles (modèles à importer et et algo V1 et V2)
 
@@ -47,6 +48,7 @@ Les objectifs de de part e taient de fournir une interface web permettant de don
 .README.md
 
 .requirements.txt 
+```
 
 ## Initialisation du projet
 
@@ -89,3 +91,11 @@ $python create_table_entreprise.py
 - Vérifier que la table "Entreprise" a bien été crée dans la bdd "Entreprise_GlobeDreamers" en éxécutant les autres lignes de "bdd_entreprise_globedreamers.sql"
 
 - Pour finir installer le module "Allow-Control-Allow-Origin: *" et l'activer pour utiliser l'API
+
+## Fonctionnement 
+
+Le fonctionnement du projet est décomposé en 2 parties : 
+  - La partie exploratoire où nous avons crée les algorithmes de recommendations
+  - La partie API avec Flask où nous utilisons les résultats de la partie exploratoire dans l'API afin de servir la partie web
+
+Lien utile pour comprendre comment Flask fonctionne [ici] (https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
