@@ -24,12 +24,19 @@ Le fonctionnement du projet est décomposé en 2 parties :
 /app 
 
  -/static (partie web)
-
+ 
   --/js
-
+   --- .script.js
+   
   --/css
+   --- .style.css
 
  -/template (partie web)
+  -- .index.html
+ 
+ - .__init__.py
+ 
+ - .routes.py
 
 /data
 
@@ -80,7 +87,7 @@ pip install –r requirements.txt
 
 ### Créer la bdd et la table Entreprise
 
-- Se connecter sur le serveur local MySQL depuis Workbench
+- Se connecter sur le serveur local MySQL depuis Workbench (renseigner )
 
 - Ouvrir dans workbench le fichier "bdd_entreprise_globedreamers.sql" et éxécuter seulement la 1ere ligne
 
