@@ -12,6 +12,12 @@ Les objectifs de départ étaient de fournir une interface web permettant de don
 
 ## Description technique 
 
+### Fonctionnement 
+
+Le fonctionnement du projet est décomposé en 2 parties : 
+  - La partie exploratoire où nous avons crée les algorithmes de recommendations
+  - La partie API avec Flask où nous utilisons les résultats de la partie exploratoire dans l'API afin de servir la partie web
+
 ### Arborescence
 
 ```bash
@@ -31,7 +37,7 @@ Les objectifs de départ étaient de fournir une interface web permettant de don
 
  -/Projets (Données de projets)
 
-/modeles (modèles à importer et et algo V1 et V2)
+/modeles (modèles à importer et algo V1 et V2)
 
 /venv (contient les librairies)
 
@@ -92,10 +98,5 @@ $python create_table_entreprise.py
 
 - Pour finir installer le module "Allow-Control-Allow-Origin: *" et l'activer pour utiliser l'API
 
-## Fonctionnement 
 
-Le fonctionnement du projet est décomposé en 2 parties : 
-  - La partie exploratoire où nous avons crée les algorithmes de recommendations
-  - La partie API avec Flask où nous utilisons les résultats de la partie exploratoire dans l'API afin de servir la partie web
-
-Lien utile pour comprendre comment Flask fonctionne [ici] (https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
+Lien utile pour comprendre comment Flask fonctionne : https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
